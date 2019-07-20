@@ -6,8 +6,10 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -16,6 +18,8 @@ import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
 import com.sdimdev.nnhackaton.presentation.presenter.search.SearchPresenter;
 import com.sdimdev.nnhackaton.presentation.view.BaseFragment;
 import com.sdimdev.nnhackaton.presentation.view.HorizontalNumberPicker;
+import com.sdimdev.nnhackaton.presentation.view.game.CoinFlyOptions;
+import com.sdimdev.nnhackaton.presentation.view.game.FlyingCoinFragment;
 
 import javax.inject.Inject;
 
@@ -24,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
 /**
  * Created by dzmitry (sdimdev) on 20.7.19
  */
-public class BuyTicketFragment extends BaseFragment implements SearchView {
+public class CoinsFragment extends BaseFragment implements SearchView {
 
     //CustomAutoCompleteTextView address;
     //CustomAutoCompleteTextView speciality;
@@ -44,7 +48,7 @@ public class BuyTicketFragment extends BaseFragment implements SearchView {
     GlobalMenuController globalMenuController;
 
     public static Fragment getInstance() {
-        return new BuyTicketFragment();
+        return new CoinsFragment();
     }
 
     @ProvidePresenter
@@ -54,7 +58,7 @@ public class BuyTicketFragment extends BaseFragment implements SearchView {
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_buyticket;
+        return R.layout.fragment_coin;
     }
 
     @Override
@@ -137,9 +141,23 @@ public class BuyTicketFragment extends BaseFragment implements SearchView {
             searchPresenter.startSearch();
         });*/
 
-        /*_countPicker = view.findViewById(R.id.count_picker);
-        _countPicker.setMin(0);
-        _countPicker.setMax(20);*/
+        Button start = view.findViewById(R.id.enterButton);
+        start.setOnClickListener(v -> {
+            View start1 = view.findViewById(R.id.enterButton);
+            View stop = view.findViewById(R.id.exitButton);
+            CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop, R.id.coreImage);
+            FlyingCoinFragment flyingCoinFragment =
+                    FlyingCoinFragment
+                            .newInstance(_coinFlyOptions.getFillBundle());
+            FragmentTransaction transaction =
+                    getFragmentManager().beginTransaction();
+
+            transaction.add(
+                    R.id.child_fragment_container,
+                    flyingCoinFragment,
+                    "COIN_FLY_OVERLAY");
+            transaction.commit();
+        });
     }
 
 

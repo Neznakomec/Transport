@@ -44,6 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/exitButton" />
 
+
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/coreImage"
                 android:layout_width="50dp"
@@ -58,7 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/exit_button"
+                android:id="@+id/exitButton"
                 style="@style/AppTheme.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,8 +69,18 @@
                 android:text="@string/btn_exit_transport"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/scrollView2"
+                app:layout_constraintTop_toTopOf="@id/enterButton"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <com.sdimdev.nnhackaton.presentation.view.game.CoinBox
+                android:id="@+id/coinBox"
+                android:layout_width="395dp"
+                android:layout_height="14dp"
+                android:adjustViewBounds="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="8dp"
+                app:layout_constraintBottom_toTopOf="@id/coreImage"></com.sdimdev.nnhackaton.presentation.view.game.CoinBox>
 
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>

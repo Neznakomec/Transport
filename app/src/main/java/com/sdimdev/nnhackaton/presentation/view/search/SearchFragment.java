@@ -66,12 +66,16 @@ public class SearchFragment extends BaseFragment implements SearchView {
     @Override
     public void onResume() {
         super.onResume();
-        getChildFragmentManager().beginTransaction()
+        /*getChildFragmentManager().beginTransaction()
                 .replace(R.id.child_fragment_container, BuyTicketFragment.getInstance(), "TICKET")
-                .commit();
+                .commit();*/
+
+       /* getChildFragmentManager().beginTransaction()
+                .replace(R.id.child_fragment_container_2, AccessibilityFragment.getInstance(), "ACCESSIBILITY")
+                .commit();*/
 
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.child_fragment_container_2, AccessibilityFragment.getInstance(), "ACCESSIBILITY")
+                .replace(R.id.child_fragment_container, CoinsFragment.getInstance(), "TICKET")
                 .commit();
     }
 
