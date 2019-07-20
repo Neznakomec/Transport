@@ -27,7 +27,6 @@
         </activity>
 
         <activity android:name=".presentation.view.zxing.ScanActivity"
-            android:screenOrientation="landscape"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden"/>
 

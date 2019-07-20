@@ -74,6 +74,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -81,6 +82,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         super.onResume();
         setTextChanges();
         if (lastQr != null) {
+            lastQr = null;
             onCodeChecked(getView());
         }
 
@@ -181,6 +183,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         int balance = text.getText().length() > 0 ? Integer.parseInt(""+text.getText()) : 0;
         balance += 20;
         text.setText(String.valueOf(balance));
+        Log.d("BALANCE", "set " + balance);
     }
 
 
@@ -233,9 +236,11 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 if (checkQr.equals(contents)) {
                     lastQr = contents;
                     //onCodeChecked(getView());
+                    Log.d("BALANCE", "тот код");
                 } else {
                     lastQr = null;
                     Toast.makeText(getContext(), "Не тот код!", Toast.LENGTH_LONG).show();
+                    Log.d("BALANCE", "не тот код");
                 }
             }
         }

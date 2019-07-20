@@ -61,6 +61,7 @@ public class SearchFragment extends BaseFragment implements SearchView {
                 .build()
                 .inject(this);
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
