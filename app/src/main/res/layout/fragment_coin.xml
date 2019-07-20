@@ -72,16 +72,6 @@
                 app:layout_constraintTop_toTopOf="@id/enterButton"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <com.sdimdev.nnhackaton.presentation.view.game.CoinBox
-                android:id="@+id/coinBox"
-                android:layout_width="395dp"
-                android:layout_height="14dp"
-                android:adjustViewBounds="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="8dp"
-                app:layout_constraintBottom_toTopOf="@id/coreImage"></com.sdimdev.nnhackaton.presentation.view.game.CoinBox>
-
             <TextView
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"

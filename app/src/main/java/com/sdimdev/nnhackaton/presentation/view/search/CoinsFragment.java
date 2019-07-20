@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,12 +22,14 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.sdimdev.nnhackaton.R;
+import com.sdimdev.nnhackaton.model.entity.log.Logger;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
 import com.sdimdev.nnhackaton.presentation.presenter.search.SearchPresenter;
 import com.sdimdev.nnhackaton.presentation.view.BaseFragment;
 import com.sdimdev.nnhackaton.presentation.view.HorizontalNumberPicker;
 import com.sdimdev.nnhackaton.presentation.view.game.CoinFlyOptions;
 import com.sdimdev.nnhackaton.presentation.view.game.FlyingCoinFragment;
+import com.sdimdev.nnhackaton.presentation.view.zxing.ScanActivity;
 
 import javax.inject.Inject;
 
@@ -203,7 +206,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     private void startBarcodeScanning()
     {
         // from MMS
-        Intent intentScan = new Intent(getActivity(), CaptureActivity.class);
+        Intent intentScan = new Intent(getActivity(), ScanActivity.class);
         intentScan.setAction(Intents.Scan.ACTION);
         intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //turn off pin-code request on activity resume, after scanning

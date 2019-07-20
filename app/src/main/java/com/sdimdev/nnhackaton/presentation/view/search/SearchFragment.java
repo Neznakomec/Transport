@@ -74,9 +74,11 @@ public class SearchFragment extends BaseFragment implements SearchView {
                 .replace(R.id.child_fragment_container_2, AccessibilityFragment.getInstance(), "ACCESSIBILITY")
                 .commit();*/
 
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.child_fragment_container, CoinsFragment.getInstance(), "TICKET")
-                .commit();
+       if (getChildFragmentManager().findFragmentByTag("TICKET") == null) {
+           getChildFragmentManager().beginTransaction()
+                   .replace(R.id.child_fragment_container, CoinsFragment.getInstance(), "TICKET")
+                   .commit();
+       }
     }
 
 
