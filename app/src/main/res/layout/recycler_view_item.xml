@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <TextView
+      android:id="@+id/headerText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:paddingStart="10dp"
+      android:paddingTop="5dp"
+      android:text="@string/parent_ticket"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:textStyle="bold"
+      android:visibility="visible"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/priceText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="10dp"
+      android:paddingTop="5dp"
+      android:text="@string/parentTicketPrice"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      app:layout_constraintStart_toStartOf="@+id/headerText"
+      app:layout_constraintTop_toBottomOf="@+id/headerText" />
+
+  <!--<include
+      layout="@layout/numberpicker_horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="10dp"
+      android:layout_weight="0"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:paddingTop="10dp" /> -->
+
+  <com.sdimdev.nnhackaton.presentation.view.HorizontalNumberPicker
+      android:id="@+id/count_picker"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="10dp"
+      android:layout_weight="0"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:paddingTop="10dp" />
+
+  <View
+      android:id="@+id/line"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginTop="32dp"
+      android:background="@android:color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/priceText" />
+
+  <!--<RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">-->
+  <ImageView
+      android:id="@+id/money_imageView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_chainStyle="packed"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/line"
+      app:srcCompat="@drawable/pic_money" />
+
+  <TextView
+      android:id="@+id/money_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
+      android:text="@string/buyticket_tariffs_text"
+      android:textColor="#2981BC"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/money_imageView"
+      app:layout_constraintTop_toBottomOf="@+id/line"
+      app:layout_constraintVertical_bias="0.75" />
+
+  <TextView
+      android:id="@+id/rules_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/buyticket_rules_text"
+      android:textColor="#2981BC"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/rules_imageView"
+      app:layout_constraintTop_toTopOf="@+id/money_text"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <ImageView
+      android:id="@+id/rules_imageView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="40dp"
+      app:layout_constraintBottom_toBottomOf="@+id/money_imageView"
+      app:layout_constraintStart_toEndOf="@+id/money_text"
+      app:layout_constraintTop_toTopOf="@+id/money_imageView"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@drawable/pic_rules" />
+
+  <ImageView
+      android:id="@+id/like_imageView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintBottom_toBottomOf="@+id/rules_imageView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/rules_imageView"
+      app:srcCompat="@drawable/heart_unliked" />
+  <!--</RelativeLayout>-->
+
+</android.support.constraint.ConstraintLayout>

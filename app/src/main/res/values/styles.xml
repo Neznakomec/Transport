@@ -1,0 +1,192 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="PopupToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+
+    <style name="ToolbarStyle" parent="Base.Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:theme">@style/ToolbarTheme</item>
+        <item name="popupTheme">@style/PopupToolbarTheme</item>
+    </style>
+
+    <!-- TEXT -->
+    <style name="Text" parent="@android:style/TextAppearance.Holo">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="Text.H5">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Text.H4">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text.H3">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.H2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.H1">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.H0">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <!-- DIALOG -->
+    <style name="Dialog"/>
+
+    <style name="Dialog.Container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">@dimen/dialog_content_min_width</item>
+        <item name="android:paddingLeft">@dimen/dialog_frame_padding_left</item>
+        <item name="android:paddingRight">@dimen/dialog_frame_padding_right</item>
+        <item name="android:paddingTop">@dimen/dialog_frame_padding_top</item>
+        <item name="android:paddingBottom">@dimen/dialog_frame_padding_bottom</item>
+    </style>
+
+    <style name="Dialog.Container.FIX">
+        <item name="android:minWidth">300dp</item>
+    </style>
+
+    <style name="Dialog.Title">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.H1</item>
+    </style>
+
+    <style name="Dialog.Message">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.H3</item>
+    </style>
+
+    <style name="Dialog.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.H4</item>
+    </style>
+
+    <style name="Dialog.Button" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textColor">@color/button_color_back_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+
+    <style name="Dialog.Button.Small" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textColor">@color/button_color_back_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:minHeight">@dimen/button_small_min_height</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="FloatDialog" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowMinWidthMajor">60%</item>
+    </style>
+
+    <!-- Global -->
+    <style name="Dialog.BottomBar">
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+
+    </style>
+
+    <style name="AppTheme.Button.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:minHeight">42dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="AppTheme.Button.Colored.Bigest" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:minHeight">64dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="AppTheme.Button.Colored.Red" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:minHeight">42dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/button_style_red</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="AppTheme.Button.Borderless" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NumberPicker" parent="@android:style/Widget.Material.NumberPicker">
+        <item name="colorControlNormal ">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.Progress" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:color">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.RadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/secondary_text</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.CheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/secondary_text</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+</resources>

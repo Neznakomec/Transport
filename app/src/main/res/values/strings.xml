@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">NNHackaton</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="btn_ok">Ок</string>
+    <string name="permissions_message_request_storage">Для корректной работы приложения необходимы разрешения на запись файлов и чтение состояния телефона</string>
+    <string name="btn_search">Поиск</string>
+    <string name="enterAddress">Введите адрес</string>
+    <string name="enterSpecialist">Введите специалиста</string>
+    <string name="enterExaminationType">Введите вид обследования</string>
+
+    <string name="speciality_immunology">Иммунолог</string>
+    <string name="speciality_sergery">Хирург</string>
+    <string name="speciality_pediatrics">Педиатр</string>
+    <string name="speciality_radiology">Рентгенолог</string>
+    <string name="speciality_urology">Уролог</string>
+    <string name="speciality_therapist">Терапевт</string>
+
+
+    <string name="examinationType_colonoscopy">Колоноскопия</string>
+    <string name="examinationType_ultrasound">УЗИ</string>
+    <string name="examinationType_fdgs">ФДГС</string>
+    <string name="examinationType_mammography">Маммография</string>
+    <string name="examinationType_fluorigraphy">Флюрография</string>
+    <string name="special_search">Только специально оборудованные</string>
+    <string name="start_search">Найти</string>
+    <string name="buy_ticket">Купить билет</string>
+    <string name="choose_ticket_text">Выберите билет</string>
+    <string name="btn_buy">Купить</string>
+    <string name="parent_ticket">Взрослый билет</string>
+    <string name="parentTicketPrice">60 ₽</string>
+
+    <string name="accessibility_header_text">Список колясок</string>
+    <string name="buyticket_tariffs_text">Тарифы</string>
+    <string name="buyticket_rules_text">Правила проезда</string>
+
+
+</resources>

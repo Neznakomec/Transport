@@ -1,0 +1,37 @@
+package com.sdimdev.nnhackaton.utils.rx;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+public class DefaultRxSchedulers implements RxSchedulers {
+	@Override
+	public Scheduler network() {
+		return Schedulers.io();
+	}
+
+	@Override
+	public Scheduler io() {
+		return Schedulers.io();
+	}
+
+	@Override
+	public Scheduler computation() {
+		return Schedulers.computation();
+	}
+
+	@Override
+	public Scheduler newThread() {
+		return Schedulers.newThread();
+	}
+
+	@Override
+	public Scheduler immediate() {
+		return Schedulers.trampoline();
+	}
+
+	@Override
+	public Scheduler mainThread() {
+		return AndroidSchedulers.mainThread();
+	}
+}

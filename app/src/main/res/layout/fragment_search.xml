@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:id="@+id/search_badge">
+
+        <include
+            layout="@layout/toolbar_default"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:weightSum="1">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.sdimdev.nnhackaton.utils.system.view.CustomAutoCompleteTextView
+                        android:id="@+id/enterAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterAddress"
+                        android:inputType="text"
+                        android:lines="1"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.sdimdev.nnhackaton.utils.system.view.CustomAutoCompleteTextView
+                        android:id="@+id/enterSpeciality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterSpecialist"
+                        android:inputType="text"
+                        android:lines="1"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.sdimdev.nnhackaton.utils.system.view.CustomAutoCompleteTextView
+                        android:id="@+id/enterExaminationType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterExaminationType"
+                        android:inputType="text"
+                        android:lines="1"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/devPriter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:checked="false"
+                    android:text="@string/special_search"
+                    android:textOff=""
+                    android:textOn=""
+                    app:showText="true"/>
+
+                <Button
+                    android:id="@+id/search_button"
+                    style="@style/AppTheme.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="48dp"
+                    android:ems="5"
+                    android:text="@string/start_search"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/AppTheme.Progress"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/child_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_badge"
+        android:orientation="horizontal">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/child_fragment_container_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/child_fragment_container"
+        android:orientation="horizontal">
+
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="sync_item_min_height">64dp</dimen>
+    <dimen name="invoice_item_min_height">32dp</dimen>
+    <dimen name="dialog_frame_padding_left">16dp</dimen>
+    <dimen name="dialog_frame_padding_right">16dp</dimen>
+    <dimen name="dialog_frame_padding_top">16dp</dimen>
+    <dimen name="dialog_frame_padding_bottom">16dp</dimen>
+    <dimen name="dialog_content_min_width">300dp</dimen>
+    <dimen name="button_min_height">48dp</dimen>
+    <dimen name="button_small_min_height">36dp</dimen>
+    <dimen name="menu_item_padding">12dp</dimen>
+    <dimen name="button_corner">8dp</dimen>
+</resources>
