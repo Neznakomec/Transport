@@ -33,6 +33,17 @@ public class CoinFlyOptions {
 		totalViewY = destinationView.getY();
 	}
 
+	public CoinFlyOptions(@NonNull View startView, @NonNull View destinationView) {
+		int[] location = new int[2];
+		startView.getLocationOnScreen(location);
+		coinBoxX = location[0];
+		coinBoxY = location[1] - ((View) (startView.getParent().getParent())).getHeight() - startView.getHeight();
+
+		View coin = destinationView;
+		totalViewX = coin.getX() + coin.getWidth() / 2;
+		totalViewY = destinationView.getY();
+	}
+
 	public void setupTotalValues(int initialValue, int newValue) {
 		this.initialValue = initialValue;
 		this.newValue = newValue;

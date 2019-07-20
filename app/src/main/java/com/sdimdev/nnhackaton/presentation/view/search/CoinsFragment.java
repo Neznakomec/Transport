@@ -145,7 +145,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         start.setOnClickListener(v -> {
             View start1 = view.findViewById(R.id.enterButton);
             View stop = view.findViewById(R.id.exitButton);
-            CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop, R.id.coreImage);
+            CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop);
             FlyingCoinFragment flyingCoinFragment =
                     FlyingCoinFragment
                             .newInstance(_coinFlyOptions.getFillBundle());
