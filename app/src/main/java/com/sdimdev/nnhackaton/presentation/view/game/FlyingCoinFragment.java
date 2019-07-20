@@ -51,7 +51,7 @@ public class FlyingCoinFragment extends Fragment {
 
     private static final int DEFAULT_NUMBER_OF_COINS = 5;
     private static final long DEFAULT_ANIMATION_START_OFFSET = 100;
-    private static final long DEFAULT_ANIMATION_DURATION = 100;
+    private static final long DEFAULT_ANIMATION_DURATION = 1000;
     public FlyingCoinFragment() {
         // Required empty public constructor
     }

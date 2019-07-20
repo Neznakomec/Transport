@@ -1,5 +1,6 @@
 package com.sdimdev.nnhackaton.presentation.view.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,9 +11,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.google.zxing.client.android.Intents;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.CaptureActivity;
 import com.sdimdev.nnhackaton.R;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
 import com.sdimdev.nnhackaton.presentation.presenter.search.SearchPresenter;
@@ -70,7 +77,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     public void onResume() {
         super.onResume();
         setTextChanges();
-
+        if (lastQr != null) {
+            onCodeChecked(getView());
+        }
 
     }
 
@@ -143,21 +152,32 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         Button start = view.findViewById(R.id.enterButton);
         start.setOnClickListener(v -> {
-            View start1 = view.findViewById(R.id.enterButton);
-            View stop = view.findViewById(R.id.exitButton);
-            CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop);
-            FlyingCoinFragment flyingCoinFragment =
-                    FlyingCoinFragment
-                            .newInstance(_coinFlyOptions.getFillBundle());
-            FragmentTransaction transaction =
-                    getFragmentManager().beginTransaction();
+            startBarcodeScanning();
 
-            transaction.add(
-                    R.id.child_fragment_container,
-                    flyingCoinFragment,
-                    "COIN_FLY_OVERLAY");
-            transaction.commit();
         });
+    }
+
+
+    public void onCodeChecked(View view) {
+        View start1 = view.findViewById(R.id.enterButton);
+        View stop = view.findViewById(R.id.exitButton);
+        CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop);
+        FlyingCoinFragment flyingCoinFragment =
+                FlyingCoinFragment
+                        .newInstance(_coinFlyOptions.getFillBundle());
+        FragmentTransaction transaction =
+                getFragmentManager().beginTransaction();
+
+        transaction.add(
+                R.id.child_fragment_container,
+                flyingCoinFragment,
+                "COIN_FLY_OVERLAY");
+        transaction.commit();
+
+        TextView text = view.findViewById(R.id.balance);
+        int balance = text.getText().length() > 0 ? Integer.parseInt(""+text.getText()) : 0;
+        balance += 20;
+        text.setText(String.valueOf(balance));
     }
 
 
@@ -179,4 +199,45 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                     //searchButton.setEnabled(true);
                 });
     }
+
+    private void startBarcodeScanning()
+    {
+        // from MMS
+        Intent intentScan = new Intent(getActivity(), CaptureActivity.class);
+        intentScan.setAction(Intents.Scan.ACTION);
+        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //turn off pin-code request on activity resume, after scanning
+        startActivityForResult(intentScan, IntentIntegrator.REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null)
+        {
+            boolean flag = true;
+            /*while (flag) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }*/
+            String contents = result.getContents();
+            if (contents != null)
+            {
+                if (checkQr.equals(contents)) {
+                    lastQr = contents;
+                    //onCodeChecked(getView());
+                } else {
+                    lastQr = null;
+                    Toast.makeText(getContext(), "Не тот код!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    String lastQr;
+    String checkQr = "CHECK";
 }

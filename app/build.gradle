@@ -70,6 +70,7 @@ dependencies {
     implementation 'jp.kuluna:calendarviewpager:1.3.0'
     implementation 'com.android.support:design:27.1.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    implementation('com.journeyapps:zxing-android-embedded:3.4.0')
 
     //di
     implementation 'com.google.dagger:dagger:2.11'

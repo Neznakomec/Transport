@@ -82,6 +82,15 @@
                 tools:layout_editor_absoluteY="8dp"
                 app:layout_constraintBottom_toTopOf="@id/coreImage"></com.sdimdev.nnhackaton.presentation.view.game.CoinBox>
 
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/coreImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
