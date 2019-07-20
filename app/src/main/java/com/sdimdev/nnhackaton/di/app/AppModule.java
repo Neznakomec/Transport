@@ -50,4 +50,10 @@ public class AppModule {
         return new DefaultRxSchedulers();
     }
 
+    @Provides
+    @Singleton
+    HackatonApplication provideHackatonApplication() {
+        return application;
+    }
+
 }

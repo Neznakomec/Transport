@@ -21,7 +21,8 @@ public interface NavigationDrawerView extends MvpView {
     void showError(Throwable th);
 
     enum MenuItem {
-        SEARCH_SCREEN(Screens.SEARCH_SCREEN, R.id.nav_route);
+        SEARCH_SCREEN(Screens.SEARCH_SCREEN, R.id.nav_search),
+        ROUTEMAP(Screens.ROUTE_MAP, R.id.nav_map);
 
         private final int menuId;
         private final String screen;

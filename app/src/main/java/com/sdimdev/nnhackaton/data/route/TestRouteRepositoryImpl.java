@@ -1,27 +1,29 @@
 package com.sdimdev.nnhackaton.data.route;
 
+import com.sdimdev.nnhackaton.data.route.parse.Parser;
 import com.sdimdev.nnhackaton.model.entity.route.RouteResult;
 import com.sdimdev.nnhackaton.model.repository.RouteRepository;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class TestRouteRepositoryImpl implements RouteRepository {
+    RouteResult result;
     private String relationId = "269601";
+    private Parser parser;
+
+    public TestRouteRepositoryImpl(Parser parser) {
+        this.parser = parser;
+    }
+
     @Override
     public Single<RouteResult> getRoute() {
-        return null;
+        return Maybe.fromCallable(() -> result)
+                .switchIfEmpty(loadNodes()
+                        .doOnSuccess(res -> result = res));
     }
-    private void loadNodes(){
 
-
+    private Single<RouteResult> loadNodes() {
+        return Single.fromCallable(() -> parser.getData(relationId));
     }
 }

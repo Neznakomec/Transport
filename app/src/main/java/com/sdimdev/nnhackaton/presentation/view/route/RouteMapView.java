@@ -18,4 +18,7 @@ public interface RouteMapView extends MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void hideProgress();
+
+    @StateStrategyType(OneExecutionStateStrategy.class)
+    void showError();
 }

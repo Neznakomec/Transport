@@ -10,9 +10,7 @@ import com.sdimdev.nnhackaton.model.entity.log.Logger;
 import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
 import com.sdimdev.nnhackaton.presentation.Screens;
 import com.sdimdev.nnhackaton.presentation.view.MessageDialog;
-import com.sdimdev.nnhackaton.presentation.view.doctor.DoctorWorkTimesFragment;
-import com.sdimdev.nnhackaton.presentation.view.doctor.DoctorsListFragment;
-import com.sdimdev.nnhackaton.presentation.view.polyclinics.PolyclinicsFragment;
+import com.sdimdev.nnhackaton.presentation.view.route.RouteMapFragment;
 import com.sdimdev.nnhackaton.presentation.view.search.SearchFragment;
 import com.sdimdev.nnhackaton.utils.system.router.DialogCommand;
 import com.sdimdev.nnhackaton.utils.system.router.FinishFlow;
@@ -69,12 +67,8 @@ public class AppNavigator extends FlowNavigator {
         switch (screenKey) {
             case Screens.SEARCH_SCREEN:
                 return SearchFragment.getInstance();
-            case Screens.POLYCLINICS_SCREEN:
-                return PolyclinicsFragment.getInstance();
-                case Screens.SCREEN_DOCTOR_LIST:
-                return DoctorsListFragment.getInstance();
-                case Screens.SCREEN_WORKDATES:
-                return DoctorWorkTimesFragment.getInstance();
+            case Screens.ROUTE_MAP:
+                return RouteMapFragment.getInstance();
         }
         return null;
     }

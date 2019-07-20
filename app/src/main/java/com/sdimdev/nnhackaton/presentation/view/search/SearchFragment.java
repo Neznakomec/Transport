@@ -32,7 +32,7 @@ public class SearchFragment extends BaseFragment implements SearchView {
     View searchButton;
     View progress;
 
-    CompositeDisposable textChangesDisposable = new CompositeDisposable();
+
     @Inject
     @InjectPresenter
     SearchPresenter searchPresenter;
@@ -79,8 +79,6 @@ public class SearchFragment extends BaseFragment implements SearchView {
     @Override
     public void onPause() {
         super.onPause();
-        textChangesDisposable.dispose();
-        textChangesDisposable = null;
     }
 
     @Override

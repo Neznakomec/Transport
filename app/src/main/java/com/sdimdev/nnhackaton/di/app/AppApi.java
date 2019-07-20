@@ -1,5 +1,6 @@
 package com.sdimdev.nnhackaton.di.app;
 
+import com.sdimdev.nnhackaton.HackatonApplication;
 import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
 import com.sdimdev.nnhackaton.model.repository.SearchRepository;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
@@ -20,4 +21,5 @@ public interface AppApi {
     NavigatorHolder provideNavigationHolder();
     RxPermission provideRxPermission();
     SearchRepository provideSearchRepository();
+    HackatonApplication provideHackatonApplication();
 }
