@@ -161,14 +161,6 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         });
 
-        ImageView bonus = view.findViewById(R.id.spendBonusButton);
-        bonus.setOnClickListener(v -> {
-            Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
-            if (launchIntent != null) {
-                startActivity(launchIntent);//null pointer check in case package name was not found
-            }
-        });
-
         TextView bonusText = view.findViewById(R.id.bonusText);
         bonusText.setOnClickListener(v -> {
             Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
