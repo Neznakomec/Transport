@@ -146,9 +146,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         searchButton = view.findViewById(R.id.search_button);*/
         progress = view.findViewById(R.id.progress);
         toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.buy_ticket);
+        toolbar.setTitle("");
         //toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-        toolbar.setNavigationOnClickListener(v -> globalMenuController.open());
+        //toolbar.setNavigationOnClickListener(v -> globalMenuController.open());
         //toolbar.setNavigationOnClickListener(v -> onBackPressed());
         /*searchButton.setOnClickListener(v -> {
             KeyBoardUtils.hideKeyboard(getActivity());

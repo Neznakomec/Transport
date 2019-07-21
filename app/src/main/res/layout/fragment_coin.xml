@@ -19,6 +19,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            app:srcCompat="@drawable/bonus" />
+
         <TextView
             android:id="@+id/header"
             style="@style/Text.H1"
