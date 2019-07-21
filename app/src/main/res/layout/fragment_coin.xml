@@ -91,6 +91,35 @@
 
         </android.support.constraint.ConstraintLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp">
+
+            <ImageView
+                android:id="@+id/spendBonusButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/knopka_mini"
+                android:text="@string/spend_bonus" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_toEndOf="@+id/spendBonusButton"
+                android:text="ПОТРАТИТЬ БОНУСЫ"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
         <FrameLayout
             android:id="@+id/child_fragment_container"
             android:layout_width="match_parent"

@@ -35,6 +35,7 @@
     <string name="btn_map">Карта</string>
     <string name="btn_enter_transport">Старт поездки</string>
     <string name="btn_exit_transport">Конец поездки</string>
+    <string name="spend_bonus">Потратить бонусы</string>
 
 
 </resources>
