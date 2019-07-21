@@ -86,10 +86,25 @@
                 android:layout_marginEnd="8dp"
                 android:text="0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/coreImage"
+                app:layout_constraintEnd_toStartOf="@id/coreImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/child_fragment_container_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/coreImage"
+            android:orientation="horizontal">
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/child_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -106,7 +121,7 @@
                 android:text="@string/spend_bonus" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/bonusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -120,20 +135,6 @@
         </RelativeLayout>
 
 
-        <FrameLayout
-            android:id="@+id/child_fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/coreImage"
-            android:orientation="horizontal">
 
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/child_fragment_container_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/child_fragment_container"
-            android:orientation="horizontal"/>
     </LinearLayout>
 </ScrollView>

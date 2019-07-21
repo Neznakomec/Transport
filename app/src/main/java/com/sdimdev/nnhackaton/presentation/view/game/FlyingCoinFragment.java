@@ -105,8 +105,8 @@ public class FlyingCoinFragment extends Fragment {
                     image.setX(destPositionX);
                     image.setY(destPositionY);
                     //Exit fragment when animation ends
-                    //if (isResumed())
-                    //getActivity().getSupportFragmentManager().beginTransaction().remove(FlyingCoinFragment.this).commit();
+                    if (isResumed())
+                    getActivity().getSupportFragmentManager().beginTransaction().hide(FlyingCoinFragment.this).commit();
                 }
             }
             @Override

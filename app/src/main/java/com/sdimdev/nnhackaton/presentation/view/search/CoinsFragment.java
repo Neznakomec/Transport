@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +21,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.journeyapps.barcodescanner.CaptureActivity;
 import com.sdimdev.nnhackaton.HackatonApplication;
 import com.sdimdev.nnhackaton.R;
-import com.sdimdev.nnhackaton.model.entity.log.Logger;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
 import com.sdimdev.nnhackaton.presentation.presenter.search.SearchPresenter;
 import com.sdimdev.nnhackaton.presentation.view.BaseFragment;
@@ -166,6 +163,14 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         ImageView bonus = view.findViewById(R.id.spendBonusButton);
         bonus.setOnClickListener(v -> {
+            Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
+            if (launchIntent != null) {
+                startActivity(launchIntent);//null pointer check in case package name was not found
+            }
+        });
+
+        TextView bonusText = view.findViewById(R.id.bonusText);
+        bonusText.setOnClickListener(v -> {
             Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
             if (launchIntent != null) {
                 startActivity(launchIntent);//null pointer check in case package name was not found
