@@ -11,6 +11,7 @@ import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
 import com.sdimdev.nnhackaton.presentation.Screens;
 import com.sdimdev.nnhackaton.presentation.view.MessageDialog;
 import com.sdimdev.nnhackaton.presentation.view.route.RouteMapFragment;
+import com.sdimdev.nnhackaton.presentation.view.search.CoinsFragment;
 import com.sdimdev.nnhackaton.presentation.view.search.SearchFragment;
 import com.sdimdev.nnhackaton.utils.system.router.DialogCommand;
 import com.sdimdev.nnhackaton.utils.system.router.FinishFlow;
@@ -66,7 +67,7 @@ public class AppNavigator extends FlowNavigator {
     protected Fragment createFragment(String screenKey, Object data) {
         switch (screenKey) {
             case Screens.SEARCH_SCREEN:
-                return SearchFragment.getInstance();
+                return CoinsFragment.getInstance();
             case Screens.ROUTE_MAP:
                 return RouteMapFragment.getInstance();
         }
