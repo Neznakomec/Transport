@@ -68,6 +68,7 @@ public class AppNavigator extends FlowNavigator {
         switch (screenKey) {
             case Screens.SEARCH_SCREEN:
                 return CoinsFragment.getInstance();
+
             case Screens.ROUTE_MAP:
                 return RouteMapFragment.getInstance();
         }

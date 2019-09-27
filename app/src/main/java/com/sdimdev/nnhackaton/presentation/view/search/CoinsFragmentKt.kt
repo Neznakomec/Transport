@@ -44,9 +44,9 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
                     }
                     scanInfo = ScanInfo(Date().time,
                             name, strength, type)
-
                 }
             }
+
             scanInfo.let {
                 Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
                 Log.d("OPERATORS", scanInfo.toString())

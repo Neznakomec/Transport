@@ -76,6 +76,7 @@ public class RouteMapFragment extends BaseFragment implements OnMapReadyCallback
         DaggerRouteComponent.builder()
                 .appApi(DIManager.get().getAppComponent())
                 .build().inject(this);
+
         super.onCreate(savedInstanceState);
     }
 
