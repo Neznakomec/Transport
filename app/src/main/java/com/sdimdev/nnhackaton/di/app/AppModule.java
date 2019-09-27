@@ -1,6 +1,8 @@
 package com.sdimdev.nnhackaton.di.app;
 
 import com.sdimdev.nnhackaton.HackatonApplication;
+import com.sdimdev.nnhackaton.data.persistence.DataBaseFactory;
+import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider;
 import com.sdimdev.nnhackaton.model.interactor.app.ResourcesManager;
 import com.sdimdev.nnhackaton.model.interactor.app.ResourcesManagerIml;
 import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
@@ -56,4 +58,8 @@ public class AppModule {
         return application;
     }
 
+    @Provides
+    DataBaseProvider provideDataBaseProvider() {
+        return new DataBaseProvider(new DataBaseFactory(application), application.getApplicationContext());
+    }
 }
