@@ -13,7 +13,7 @@ import java.util.ArrayList
 @Entity(tableName = "ScanInfo")
 data class ScanInfo(
         @ColumnInfo(name = "date")
-        val date: Int? = null,
+        val date: Long? = null,
         @ColumnInfo(name = "operator")
         val operator: String,
         @ColumnInfo(name = "SignalStrength")
@@ -26,7 +26,7 @@ data class ScanInfo(
         val lon: Double? = null,
         @ColumnInfo(name = "MobileId")
         val mobileId: String? = null,
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "Id")
         val id: Int = 0
 )

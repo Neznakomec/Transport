@@ -46,6 +46,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     Toolbar toolbar;
     //View searchButton;
     View progress;
+    CoinsFragmentKt wrapper;
 
     HorizontalNumberPicker _countPicker;
 
@@ -75,6 +76,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
+        wrapper = new CoinsFragmentKt(this);
+        wrapper.startScan();
     }
 
     @Override
