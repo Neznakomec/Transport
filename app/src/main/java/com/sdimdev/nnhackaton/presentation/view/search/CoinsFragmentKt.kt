@@ -11,6 +11,7 @@ import com.sdimdev.nnhackaton.data.persistence.entity.mobile.ScanInfo
 import java.util.*
 
 class CoinsFragmentKt(private val fragment: CoinsFragment) {
+    val TAG: String = "OPERATORS";
     private val context: Context? = fragment.context;
 
     fun startScan() {
@@ -23,6 +24,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
         val sb = StringBuffer()
         var type: String? = null
         var scanInfo: ScanInfo? = null
+        Log.d(TAG, Objects.toString(cellInfos))
         if (cellInfos != null) {
             for (i in cellInfos.indices) {
                 if (cellInfos[i].isRegistered) {
@@ -49,7 +51,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
 
             scanInfo.let {
                 Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
-                Log.d("OPERATORS", scanInfo.toString())
+                Log.d(TAG, scanInfo.toString())
             }
 
         }
