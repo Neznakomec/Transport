@@ -17,6 +17,7 @@ import org.json.JSONObject
 import java.util.*
 import android.telephony.SubscriptionInfo
 import android.R
+import android.location.Location
 import android.provider.Settings.Global.getString
 import android.telephony.SubscriptionManager
 import android.telephony.CellIdentityLte
@@ -31,6 +32,7 @@ import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
 
 
 class CoordinateCollect(private val context: Context, private val dataBaseProvider: DataBaseProvider) {
+    var location: Location? = null
     val TAG: String = "OPERATORS";
 
     fun startScan() {
@@ -85,8 +87,10 @@ class CoordinateCollect(private val context: Context, private val dataBaseProvid
                     scanInfo = ScanInfo(Date().time,
                             name, strength, type, mobileId = telephonyManager.imei)
 
-                    scanInfo?.lat = Random().nextDouble() * 100.0;
-                    scanInfo?.lon = Random().nextDouble() * 100.0;
+
+                    scanInfo?.lat = location?.latitude ?: -1.0 //Random().nextDouble() * 100.0;
+                    scanInfo?.lon = location?.longitude ?: -1.0 //Random().nextDouble() * 100.0;
+
 
                     val gson = Gson()
                     val json  = gson.toJson(subscriptionInfo)
