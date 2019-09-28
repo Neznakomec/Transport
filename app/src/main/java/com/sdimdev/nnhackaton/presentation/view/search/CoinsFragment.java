@@ -118,7 +118,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         setTextChanges();
         if (lastQr != null) {
             lastQr = null;
-            onCodeChecked(getView(), 20);
+            //onCodeChecked(getView(), 20);
         }
 
     }
@@ -175,24 +175,14 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*address = view.findViewById(R.id.enterAddress);
-        speciality = view.findViewById(R.id.enterSpeciality);
-        examinationType = view.findViewById(R.id.enterExaminationType);
-        searchButton = view.findViewById(R.id.search_button);*/
         progress = view.findViewById(R.id.progress);
         toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle("");
-        //toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-        //toolbar.setNavigationOnClickListener(v -> globalMenuController.open());
-        //toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        /*searchButton.setOnClickListener(v -> {
-            KeyBoardUtils.hideKeyboard(getActivity());
-            searchPresenter.startSearch();
-        });*/
 
         Button start = view.findViewById(R.id.enterButton);
         start.setOnClickListener(v -> {
-            startBarcodeScanning();
+            //startBarcodeScanning();
+            onCodeChecked(20);
 
         });
         toolbar.setNavigationOnClickListener(v -> {

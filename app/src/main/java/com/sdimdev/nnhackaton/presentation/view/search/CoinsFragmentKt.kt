@@ -15,6 +15,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import java.util.*
+import android.telephony.SubscriptionInfo
+import android.R
+import android.provider.Settings.Global.getString
+import android.telephony.SubscriptionManager
+import android.telephony.CellIdentityLte
+import android.telephony.CellIdentityWcdma
+import android.telephony.CellIdentityGsm
+import android.telephony.CellInfo
+
+
+
+
+
+
 
 
 class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseProvider: DataBaseProvider) {
@@ -26,10 +40,12 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         var strength: String? = null
         var operator: String? = null
         val cellInfos = telephonyManager.allCellInfo
-        val name = telephonyManager.networkOperatorName
+        var name = ""
         val sb = StringBuffer()
         var type: String? = null
+        var mnc: Int = 0
         var scanInfo: ScanInfo? = null
+
         Log.d(TAG, Objects.toString(cellInfos))
         if (cellInfos != null) {
             for (i in cellInfos.indices) {
@@ -39,22 +55,42 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                         val cellSignalStrengthWcdma = cellInfoWcdma.cellSignalStrength
                         type = "Wcdma"
                         strength = cellSignalStrengthWcdma.dbm.toString()
+                        mnc = cellInfoWcdma.cellIdentity.mnc
                     } else if (cellInfos[i] is CellInfoGsm) {
                         val cellInfogsm = cellInfos[i] as CellInfoGsm
                         val cellSignalStrengthGsm = cellInfogsm.cellSignalStrength
                         type = "Gsm"
                         strength = cellSignalStrengthGsm.dbm.toString()
+                        mnc = cellInfogsm.cellIdentity.mnc
                     } else if (cellInfos[i] is CellInfoLte) {
                         val cellInfoLte = cellInfos[i] as CellInfoLte
                         val cellSignalStrengthLte = cellInfoLte.cellSignalStrength
                         type = "Lte"
                         strength = cellSignalStrengthLte.dbm.toString()
+                        mnc = cellInfoLte.cellIdentity.mnc
+                    }
+
+
+                    val subscriptionManager = SubscriptionManager.from(fragment.getActivity())
+                    val activeSubscriptionInfoList = subscriptionManager.activeSubscriptionInfoList
+
+                    for (i in activeSubscriptionInfoList.indices) {
+                        val temp = activeSubscriptionInfoList[i]
+                        val tempMnc = temp.mnc
+
+                        if (tempMnc == mnc) {
+                            name = temp.carrierName as String
+                        }
                     }
                     scanInfo = ScanInfo(Date().time,
                             name, strength, type, mobileId = telephonyManager.imei)
 
                     scanInfo?.lat = Random().nextDouble() * 100.0;
                     scanInfo?.lon = Random().nextDouble() * 100.0;
+
+
+
+
                     scanInfo?.let {
                         Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
                         Log.d(TAG, scanInfo.toString())
@@ -84,6 +120,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
             scanInfoDao.insert(scanInfo)
+            fragment.onCodeChecked(1)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
