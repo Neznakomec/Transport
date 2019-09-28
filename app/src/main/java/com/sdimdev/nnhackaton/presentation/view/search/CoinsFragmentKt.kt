@@ -120,10 +120,12 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
             scanInfoDao.insert(scanInfo)
-            fragment.onCodeChecked(1)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .andThen({
+                    fragment.onCodeChecked(1)
+                })
                 .subscribe({
                     Log.d(TAG, "fine")
                 }, {
