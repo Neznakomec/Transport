@@ -16,6 +16,7 @@ import android.R.id
 import com.sdimdev.nnhackaton.data.persistence.dao.mobile.ScanInfoDao
 import io.reactivex.Completable
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
@@ -54,16 +55,18 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
                     }
                     scanInfo = ScanInfo(Date().time,
                             name, strength, type, mobileId = telephonyManager.imei)
+
+                    scanInfo?.lat = Random().nextDouble() * 100.0;
+                    scanInfo?.lon = Random().nextDouble() * 100.0;
+                    scanInfo?.let {
+                        Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
+                        Log.d(TAG, scanInfo.toString())
+                        sendScanInfo(it)
+                    }
                 }
             }
 
-            scanInfo?.lat = Random().nextDouble() * 100.0;
-            scanInfo?.lon = Random().nextDouble() * 100.0;
-            scanInfo?.let {
-                Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
-                Log.d(TAG, scanInfo.toString())
-                sendScanInfo(it)
-            }
+
         }
     }
 
@@ -85,6 +88,10 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
         Completable.fromAction( {
             scanInfoDao.insert(scanInfo)
         }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .andThen( {
+                    fragment.onCodeChecked(1)
+                })
                 .subscribe();
 
 

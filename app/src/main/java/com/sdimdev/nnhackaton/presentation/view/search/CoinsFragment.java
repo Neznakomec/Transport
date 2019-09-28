@@ -113,7 +113,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         setTextChanges();
         if (lastQr != null) {
             lastQr = null;
-            onCodeChecked(getView());
+            onCodeChecked(getView(), 20);
         }
 
     }
@@ -200,7 +200,12 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         });
     }
 
-    public void onCodeChecked(View view) {
+    public void onCodeChecked(int valueToAdd) {
+        View view = getView();
+        onCodeChecked(view, valueToAdd);
+    }
+
+    public void onCodeChecked(View view, int valueToAdd) {
         View start1 = view.findViewById(R.id.enterButton);
         View stop = view.findViewById(R.id.exitButton);
         CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop);
@@ -218,7 +223,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         TextView text = view.findViewById(R.id.balance);
         int balance = text.getText().length() > 0 ? Integer.parseInt("" + text.getText()) : 0;
-        balance += 20;
+        balance += valueToAdd;
         text.setText(String.valueOf(balance));
         Log.d("BALANCE", "set " + balance);
     }
