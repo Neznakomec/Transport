@@ -83,8 +83,8 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
         val db = HackatonApplication.app.getDatabase()
         val scanInfoDao = db.scanInfoDao
         Completable.fromAction( {
-            //scanInfoDao.insert(scanInfo)
-        }).observeOn(Schedulers.io())
+            scanInfoDao.insert(scanInfo)
+        }).subscribeOn(Schedulers.io())
                 .subscribe();
 
 
