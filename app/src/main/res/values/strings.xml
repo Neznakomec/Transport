@@ -33,6 +33,7 @@
     <string name="buyticket_tariffs_text">Тарифы</string>
     <string name="buyticket_rules_text">Правила проезда</string>
     <string name="btn_map">Карта</string>
+    <string name="btn_savedb">Сохранить базу</string>
     <string name="btn_enter_transport">Старт поездки</string>
     <string name="btn_exit_transport">Конец поездки</string>
     <string name="spend_bonus">Потратить бонусы</string>
