@@ -12,6 +12,7 @@
         android:fitsSystemWindows="true"
         android:minHeight="?android:attr/actionBarSize"
         app:navigationIcon="@drawable/ic_menu_white_24dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/colorPrimaryYellow">
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>
