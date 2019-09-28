@@ -25,6 +25,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sdimdev.nnhackaton.HackatonApplication;
 import com.sdimdev.nnhackaton.R;
+import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider;
 import com.sdimdev.nnhackaton.di.DIManager;
 import com.sdimdev.nnhackaton.di.coin.search.DaggerCoinComponent;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
@@ -51,6 +52,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     //CustomAutoCompleteTextView examinationType;
     @Inject
     RxPermission rxPermission;
+
+    @Inject
+    DataBaseProvider dataBaseProvider;
     Toolbar toolbar;
     //View searchButton;
     View progress;
@@ -93,12 +97,13 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 .build().inject(this);
 
 
-        wrapper = new CoinsFragmentKt(this);
+        wrapper = new CoinsFragmentKt(this, dataBaseProvider);
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            rxPermission.requestEach(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE})
+            rxPermission.requestEach(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
                     .observeOn(AndroidSchedulers.mainThread())
                     .toList()
                     .subscribe();
@@ -189,6 +194,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         start.setOnClickListener(v -> {
             startBarcodeScanning();
 
+        });
+        toolbar.setNavigationOnClickListener(v -> {
+            globalMenuController.open();
         });
 
         TextView bonusText = view.findViewById(R.id.bonusText);

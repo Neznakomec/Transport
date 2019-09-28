@@ -8,18 +8,16 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
 import com.sdimdev.nnhackaton.HackatonApplication
+import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider
 import com.sdimdev.nnhackaton.data.persistence.entity.mobile.ScanInfo
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import java.util.*
-import android.R.attr.name
-import android.R.id
-import com.sdimdev.nnhackaton.data.persistence.dao.mobile.ScanInfoDao
-import io.reactivex.Completable
-import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 
 
-class CoinsFragmentKt(private val fragment: CoinsFragment) {
+class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseProvider: DataBaseProvider) {
     val TAG: String = "OPERATORS";
     private val context: Context? = fragment.context;
 
@@ -80,12 +78,18 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
         json.put("mobile", scanInfo.mobileId)
 
         // save to db
-        val db = HackatonApplication.app.getDatabase()
+        val db = dataBaseProvider.roomMobileDataBase
         val scanInfoDao = db.scanInfoDao
-        Completable.fromAction( {
-            //scanInfoDao.insert(scanInfo)
-        }).observeOn(Schedulers.io())
-                .subscribe();
+        val disposable = Completable.fromAction({
+            scanInfoDao.insert(scanInfo)
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Log.d(TAG, "fine")
+                }, {
+                    Log.e(TAG, "error", it)
+                });
 
 
     }

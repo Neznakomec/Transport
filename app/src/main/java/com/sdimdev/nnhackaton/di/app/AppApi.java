@@ -1,6 +1,7 @@
 package com.sdimdev.nnhackaton.di.app;
 
 import com.sdimdev.nnhackaton.HackatonApplication;
+import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider;
 import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
 import com.sdimdev.nnhackaton.model.repository.SearchRepository;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
@@ -15,11 +16,20 @@ import ru.terrakok.cicerone.NavigatorHolder;
  */
 public interface AppApi {
     RxSchedulers provideRxSchedulers();
+
     TimeSourceProvider provideTimeSourceProvider();
+
     GlobalMenuController provideGlobalMenuController();
+
     FlowRouter provideFlowRouter();
+
     NavigatorHolder provideNavigationHolder();
+
     RxPermission provideRxPermission();
+
     SearchRepository provideSearchRepository();
+
     HackatonApplication provideHackatonApplication();
+
+    DataBaseProvider provideDataBaseProvider();
 }
