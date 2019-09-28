@@ -13,8 +13,8 @@ public class HackatonApplication extends Application {
 
     private RoomMobileDataBase database;
 
-    private static final String DEBUG_PATH = "/storage/emulated/0/folder/database-name";
-    private static final String RELEASE_PATH_DB_NAME = "database_name";
+    private static final String DEBUG_PATH = "/storage/emulated/0/folder/database-name.db3";
+    private static final String RELEASE_PATH_DB_NAME = "database_name.db3";
     @Override
     public void onCreate() {
         FragmentManager.enableDebugLogging(true);
