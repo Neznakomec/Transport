@@ -14,6 +14,9 @@ import java.util.*
 import android.R.attr.name
 import android.R.id
 import com.sdimdev.nnhackaton.data.persistence.dao.mobile.ScanInfoDao
+import io.reactivex.Completable
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 
 
 class CoinsFragmentKt(private val fragment: CoinsFragment) {
@@ -56,9 +59,10 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
 
             scanInfo?.lat = Random().nextDouble() * 100.0;
             scanInfo?.lon = Random().nextDouble() * 100.0;
-            scanInfo.let {
+            scanInfo?.let {
                 Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
                 Log.d(TAG, scanInfo.toString())
+                sendScanInfo(it)
             }
         }
     }
@@ -78,7 +82,11 @@ class CoinsFragmentKt(private val fragment: CoinsFragment) {
         // save to db
         val db = HackatonApplication.app.getDatabase()
         val scanInfoDao = db.scanInfoDao
-        scanInfoDao.insert(scanInfo)
+        Completable.fromAction( {
+            //scanInfoDao.insert(scanInfo)
+        }).observeOn(Schedulers.io())
+                .subscribe();
+
 
     }
 
