@@ -21,9 +21,9 @@ data class ScanInfo(
         @ColumnInfo(name = "NetworkType")
         val networkType: String?,
         @ColumnInfo(name = "Latitude")
-        val lat: Double? = null,
+        var lat: Double? = null,
         @ColumnInfo(name = "Longidute")
-        val lon: Double? = null,
+        var lon: Double? = null,
         @ColumnInfo(name = "MobileId")
         val mobileId: String? = null,
         @PrimaryKey(autoGenerate = true)
