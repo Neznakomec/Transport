@@ -12,6 +12,7 @@ import com.sdimdev.nnhackaton.di.DIManager;
 import com.sdimdev.nnhackaton.presentation.view.search.CoordinateCollect;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class CollectService extends Service {
 
@@ -29,9 +30,20 @@ public class CollectService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
+		context = getApplicationContext();
 		dataBaseProvider = DIManager.get().getAppComponent().provideDataBaseProvider();
-        new CoordinateCollect(context, dataBaseProvider).startScan();
+
+		// cancel if already existed
+		if(mTimer != null) {
+			mTimer.cancel();
+		} else {
+			// recreate new
+			mTimer = new Timer();
+		}
+		// schedule task
+		mTimer.scheduleAtFixedRate(new TimeDisplayTimerTask(), 0, NOTIFY_INTERVAL);
+
+        //
     }
 
 
@@ -44,4 +56,20 @@ public class CollectService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY;
     }
+
+	class TimeDisplayTimerTask extends TimerTask {
+
+		@Override
+		public void run() {
+			// run on another thread
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					new CoordinateCollect(context, dataBaseProvider).startScan();
+				}
+
+			});
+		}
+	}
 }
