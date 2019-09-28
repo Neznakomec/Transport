@@ -1,33 +1,19 @@
 package com.sdimdev.nnhackaton.presentation.view.search
 
 import android.content.Context
-import android.telephony.CellInfoGsm
-import android.telephony.CellInfoLte
-import android.telephony.CellInfoWcdma
-import android.telephony.TelephonyManager
+import android.telephony.*
 import android.util.Log
 import android.widget.Toast
-import com.sdimdev.nnhackaton.HackatonApplication
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider
+import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
 import com.sdimdev.nnhackaton.data.persistence.entity.mobile.ScanInfo
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import java.util.*
-import android.telephony.SubscriptionInfo
-import android.R
-import android.provider.Settings.Global.getString
-import android.telephony.SubscriptionManager
-import android.telephony.CellIdentityLte
-import android.telephony.CellIdentityWcdma
-import android.telephony.CellIdentityGsm
-import android.telephony.CellInfo
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
-
-
 
 
 class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseProvider: DataBaseProvider) {
@@ -90,7 +76,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     scanInfo?.lon = Random().nextDouble() * 100.0;
 
                     val gson = Gson()
-                    val json  = gson.toJson(subscriptionInfo)
+                    val json = gson.toJson(subscriptionInfo)
                     val json2 = gson.toJson(cellInfos[i])
 
                     val jo: JsonObject = JsonObject()
@@ -129,7 +115,9 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         val db = dataBaseProvider.roomMobileDataBase
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
-            scanInfoDao.insert(scanInfo)
+            val id = scanInfoDao.insert(scanInfo)
+            raw.id = id
+            scanInfoDao.insert(raw)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
