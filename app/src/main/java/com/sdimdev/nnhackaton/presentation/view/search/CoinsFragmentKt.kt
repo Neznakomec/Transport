@@ -23,10 +23,9 @@ import android.telephony.CellIdentityLte
 import android.telephony.CellIdentityWcdma
 import android.telephony.CellIdentityGsm
 import android.telephony.CellInfo
-
-
-
-
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
 
 
 
@@ -74,11 +73,13 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     val subscriptionManager = SubscriptionManager.from(fragment.getActivity())
                     val activeSubscriptionInfoList = subscriptionManager.activeSubscriptionInfoList
 
+                    var subscriptionInfo: SubscriptionInfo? = null
                     for (i in activeSubscriptionInfoList.indices) {
                         val temp = activeSubscriptionInfoList[i]
                         val tempMnc = temp.mnc
 
                         if (tempMnc == mnc) {
+                            subscriptionInfo = temp
                             name = temp.carrierName as String
                         }
                     }
@@ -88,13 +89,22 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     scanInfo?.lat = Random().nextDouble() * 100.0;
                     scanInfo?.lon = Random().nextDouble() * 100.0;
 
+                    val gson = Gson()
+                    val json  = gson.toJson(subscriptionInfo)
+                    val json2 = gson.toJson(cellInfos[i])
 
+                    val jo: JsonObject = JsonObject()
+                    jo.add("subscriptionInfo", gson.toJsonTree(subscriptionInfo))
+                    jo.add("cellInfo", gson.toJsonTree(cellInfos[i]))
+                    //val map = mutableMapOf<String, String>()
+                    //map.put("subscriptionInfo", json)
+                    //map.put("cellInfo", json2)
 
 
                     scanInfo?.let {
                         Toast.makeText(context, scanInfo.toString(), Toast.LENGTH_SHORT)
                         Log.d(TAG, scanInfo.toString())
-                        sendScanInfo(it)
+                        sendScanInfo(it, RawDataRecord(id = 0, json = Gson().toJson(jo)))
                     }
                 }
             }
@@ -103,7 +113,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         }
     }
 
-    fun sendScanInfo(scanInfo: ScanInfo) {
+    fun sendScanInfo(scanInfo: ScanInfo, raw: RawDataRecord) {
         val json = JSONObject()
         val point = JSONObject()
         point.put("lat", scanInfo.lat)

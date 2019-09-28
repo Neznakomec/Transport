@@ -1,0 +1,43 @@
+{
+  "subscriptionInfo": {
+    "mCarrierName": "Tele2",
+    "mCountryIso": "ru",
+    "mDataRoaming": 0,
+    "mDisplayName": "Tele2",
+    "mIccId": "89701201465300981346",
+    "mIconBitmap": {
+      "mDensity": 480,
+      "mHeight": 72,
+      "mIsMutable": false,
+      "mNativePtr": 518176237120,
+      "mRecycled": false,
+      "mRequestPremultiplied": true,
+      "mWidth": 72
+    },
+    "mIconTint": -16746133,
+    "mId": 1,
+    "mIsEmbedded": false,
+    "mMcc": 250,
+    "mMnc": 20,
+    "mNameSource": 0,
+    "mSimSlotIndex": 0
+  },
+  "cellInfo": {
+    "mCellIdentityGsm": {
+      "mArfcn": 664,
+      "mBsic": 4,
+      "mCid": 121,
+      "mLac": 49130,
+      "mMcc": 250,
+      "mMnc": 20
+    },
+    "mCellSignalStrengthGsm": {
+      "mBitErrorRate": 99,
+      "mSignalStrength": 18,
+      "mTimingAdvance": 2147483647
+    },
+    "mRegistered": true,
+    "mTimeStamp": 44673018133109,
+    "mTimeStampType": 3
+  }
+}
