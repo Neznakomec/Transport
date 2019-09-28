@@ -10,9 +10,7 @@ import com.sdimdev.nnhackaton.model.entity.log.Logger;
 import com.sdimdev.nnhackaton.model.interactor.app.TimeSourceProvider;
 import com.sdimdev.nnhackaton.presentation.Screens;
 import com.sdimdev.nnhackaton.presentation.view.MessageDialog;
-import com.sdimdev.nnhackaton.presentation.view.route.RouteMapFragment;
 import com.sdimdev.nnhackaton.presentation.view.search.CoinsFragment;
-import com.sdimdev.nnhackaton.presentation.view.search.SearchFragment;
 import com.sdimdev.nnhackaton.utils.system.router.DialogCommand;
 import com.sdimdev.nnhackaton.utils.system.router.FinishFlow;
 import com.sdimdev.nnhackaton.utils.system.router.FlowNavigator;
@@ -68,9 +66,6 @@ public class AppNavigator extends FlowNavigator {
         switch (screenKey) {
             case Screens.SEARCH_SCREEN:
                 return CoinsFragment.getInstance();
-
-            case Screens.ROUTE_MAP:
-                return RouteMapFragment.getInstance();
         }
         return null;
     }

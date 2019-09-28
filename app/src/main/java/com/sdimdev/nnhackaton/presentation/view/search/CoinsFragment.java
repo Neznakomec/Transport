@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import com.sdimdev.nnhackaton.HackatonApplication;
 import com.sdimdev.nnhackaton.R;
 import com.sdimdev.nnhackaton.di.DIManager;
 import com.sdimdev.nnhackaton.di.coin.search.DaggerCoinComponent;
-import com.sdimdev.nnhackaton.di.route.DaggerRouteComponent;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
 import com.sdimdev.nnhackaton.presentation.presenter.search.SearchPresenter;
 import com.sdimdev.nnhackaton.presentation.view.BaseFragment;
@@ -67,6 +65,8 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
     @Inject
     GlobalMenuController globalMenuController;
+    String lastQr;
+    String checkQr = "CHECK";
 
     public static Fragment getInstance() {
         return new CoinsFragment();
@@ -97,7 +97,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             rxPermission.requestEach(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE})
                     .observeOn(AndroidSchedulers.mainThread())
                     .toList()
@@ -200,7 +200,6 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         });
     }
 
-
     public void onCodeChecked(View view) {
         View start1 = view.findViewById(R.id.enterButton);
         View stop = view.findViewById(R.id.exitButton);
@@ -218,12 +217,11 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         transaction.commit();
 
         TextView text = view.findViewById(R.id.balance);
-        int balance = text.getText().length() > 0 ? Integer.parseInt(""+text.getText()) : 0;
+        int balance = text.getText().length() > 0 ? Integer.parseInt("" + text.getText()) : 0;
         balance += 20;
         text.setText(String.valueOf(balance));
         Log.d("BALANCE", "set " + balance);
     }
-
 
     @Override
     public void showProgress() {
@@ -244,8 +242,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 });
     }
 
-    private void startBarcodeScanning()
-    {
+    private void startBarcodeScanning() {
         // from MMS
         Intent intentScan = new Intent(getActivity(), ScanActivity.class);
         intentScan.setAction(Intents.Scan.ACTION);
@@ -258,8 +255,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null)
-        {
+        if (result != null) {
             boolean flag = true;
             /*while (flag) {
                 try {
@@ -269,8 +265,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 }
             }*/
             String contents = result.getContents();
-            if (contents != null)
-            {
+            if (contents != null) {
                 if (true/*checkQr.equals(contents)*/) {
                     lastQr = contents;
                     //onCodeChecked(getView());
@@ -283,7 +278,4 @@ public class CoinsFragment extends BaseFragment implements SearchView {
             }
         }
     }
-
-    String lastQr;
-    String checkQr = "CHECK";
 }
