@@ -37,7 +37,7 @@ public abstract class ScanInfoDao {
         long id = insert(toDb);
         o.setId(id);
         insert(o);
-        checkpoint(new SimpleSQLiteQuery("pragma wal_checkpoint"));
+        //checkpoint(new SimpleSQLiteQuery("pragma wal_checkpoint"));
 
     }
 }

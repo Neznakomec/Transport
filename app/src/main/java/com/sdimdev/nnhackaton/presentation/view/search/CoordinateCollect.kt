@@ -27,8 +27,8 @@ import android.telephony.CellInfo
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
-
-
+import com.sdimdev.nnhackaton.data.retrofit.ApiUtils
+import com.sdimdev.nnhackaton.data.retrofit.NetworkService
 
 
 class CoordinateCollect(private val context: Context, private val dataBaseProvider: DataBaseProvider) {
@@ -131,6 +131,9 @@ class CoordinateCollect(private val context: Context, private val dataBaseProvid
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
             scanInfoDao.insert(scanInfo, raw)
+
+            // retrofit
+            ApiUtils.test(scanInfo)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -139,8 +142,5 @@ class CoordinateCollect(private val context: Context, private val dataBaseProvid
                 }, {
                     Log.e(TAG, "error", it)
                 });
-
-
     }
-
 }
