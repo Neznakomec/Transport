@@ -129,7 +129,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         val db = dataBaseProvider.roomMobileDataBase
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
-            scanInfoDao.insert(scanInfo)
+            scanInfoDao.insert(scanInfo, raw)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
