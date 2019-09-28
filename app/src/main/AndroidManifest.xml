@@ -34,6 +34,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDY4lMLeqhWYRT8STDrs0t6Hf4Sayc0CT0"/>
+
+        <service android:name=".data.service.CollectService"/>
     </application>
 
 </manifest>
