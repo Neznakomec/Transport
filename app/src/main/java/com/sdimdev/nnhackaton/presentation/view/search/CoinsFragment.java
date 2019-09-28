@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +57,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     Toolbar toolbar;
     //View searchButton;
     View progress;
+    View enterButton;
+    View exitButton;
+    TextView balanceTextView;
     CoinsFragmentKt wrapper;
 
     HorizontalNumberPicker _countPicker;
@@ -109,7 +111,6 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                     .subscribe();
             return;
         }
-        wrapper.startScan();
     }
 
     @Override
@@ -177,10 +178,12 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         super.onViewCreated(view, savedInstanceState);
         progress = view.findViewById(R.id.progress);
         toolbar = view.findViewById(R.id.toolbar);
+        enterButton = view.findViewById(R.id.enterButton);
+        exitButton = view.findViewById(R.id.exitButton);
+        balanceTextView = view.findViewById(R.id.balance);
         toolbar.setTitle("");
 
-        Button start = view.findViewById(R.id.enterButton);
-        start.setOnClickListener(v -> {
+        enterButton.setOnClickListener(v -> {
             //startBarcodeScanning();
             onCodeChecked(20);
 
@@ -196,17 +199,13 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 startActivity(launchIntent);//null pointer check in case package name was not found
             }
         });
+        if(savedInstanceState==null)
+            wrapper.startScan();
     }
 
     public void onCodeChecked(int valueToAdd) {
-        View view = getView();
-        onCodeChecked(view, valueToAdd);
-    }
 
-    public void onCodeChecked(View view, int valueToAdd) {
-        View start1 = view.findViewById(R.id.enterButton);
-        View stop = view.findViewById(R.id.exitButton);
-        CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(start1, stop);
+        CoinFlyOptions _coinFlyOptions = new CoinFlyOptions(enterButton, exitButton);
         FlyingCoinFragment flyingCoinFragment =
                 FlyingCoinFragment
                         .newInstance(_coinFlyOptions.getFillBundle());
@@ -219,10 +218,9 @@ public class CoinsFragment extends BaseFragment implements SearchView {
                 "COIN_FLY_OVERLAY");
         transaction.commit();
 
-        TextView text = view.findViewById(R.id.balance);
-        int balance = text.getText().length() > 0 ? Integer.parseInt("" + text.getText()) : 0;
+        int balance = balanceTextView.getText().length() > 0 ? Integer.parseInt("" + balanceTextView.getText()) : 0;
         balance += valueToAdd;
-        text.setText(String.valueOf(balance));
+        balanceTextView.setText(String.valueOf(balance));
         Log.d("BALANCE", "set " + balance);
     }
 

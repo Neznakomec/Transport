@@ -91,7 +91,7 @@ public class CoinFlyOptions {
 		args.putFloat(FlyingCoinFragment.KEY_DEST_POSITION_X, getDestX());
 		args.putFloat(FlyingCoinFragment.KEY_DEST_POSITION_Y, getDestY());
 		args.putInt(FlyingCoinFragment.KEY_IMAGE_RESOURCE_ID, R.drawable.g_coin_revolving);
-		args.putFloat(FlyingCoinFragment.KEY_NUMBER_OF_COINS, getNumberOfCoins());
+		args.putInt(FlyingCoinFragment.KEY_NUMBER_OF_COINS, getNumberOfCoins());
 		args.putLong(FlyingCoinFragment.KEY_ANIMATION_DURATION, 200);
 		return args;
 	}

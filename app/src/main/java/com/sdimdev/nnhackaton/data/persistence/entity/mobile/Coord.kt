@@ -7,21 +7,19 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "ScanInfo")
 class ScanInfo(
         @ColumnInfo(name = "date")
-        val date: Long? = null,
+        var date: Long? = null,
         @ColumnInfo(name = "operator")
-        val operator: String,
+        var operator: String,
         @ColumnInfo(name = "SignalStrength")
-        val strength: String?,
+        var strength: String?,
         @ColumnInfo(name = "NetworkType")
-        val networkType: String?,
+        var networkType: String?,
         @ColumnInfo(name = "Latitude")
         var lat: Double? = null,
         @ColumnInfo(name = "Longidute")
         var lon: Double? = null,
         @ColumnInfo(name = "MobileId")
-        val mobileId: String? = null) {
-
+        val mobileId: String? = null,
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "Id")
-        lateinit var id: Int
-}
+        var id: Long = 0)
