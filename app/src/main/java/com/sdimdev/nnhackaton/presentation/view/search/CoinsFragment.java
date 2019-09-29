@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -38,6 +39,10 @@ import com.sdimdev.nnhackaton.presentation.view.game.FlyingCoinFragment;
 import com.sdimdev.nnhackaton.presentation.view.zxing.ScanActivity;
 import com.vanniktech.rxpermission.RxPermission;
 
+import java.text.SimpleDateFormat;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,6 +66,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
     View progress;
     View enterButton;
     View exitButton;
+    TextView durationTextView;
     TextView balanceTextView;
     CoinsFragmentKt wrapper;
 
@@ -175,6 +181,68 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         textChangesDisposable = null;
     }
 
+    Timer timer;
+    TimerTask timerTask;
+    private int time = 0;
+    private static int period = 1000;
+    public void startTimer() {
+        //set a new Timer
+        if (timer != null) {
+            return;
+        }
+        timer = new Timer();
+
+        //initialize the TimerTask's job
+        initializeTimerTask();
+
+        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
+        timer.schedule(timerTask, 0, period);
+    }
+
+    public void stoptimertask(View v) {
+        //stop the timer, if it's not already null
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+
+        time = 0;
+        durationTextView.setText(String.format(getString(R.string.duration_format_str), "00:00:00"));
+    }
+    public void initializeTimerTask() {
+
+        timerTask = new TimerTask() {
+            public void run() {
+
+                //use a handler to run a toast that shows the current timestamp
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        //get the current timeStamp
+                        /*Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MMMM:yyyy HH:mm:ss a");
+                        final String strDate = simpleDateFormat.format(calendar.getTime());
+
+                        //show the toast
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
+                        toast.show();*/
+                        time += period / DateUtils.SECOND_IN_MILLIS;
+                        int hh = time / 3600;
+                        int mm = (time % 3600) / 60;
+                        int ss = (time % 60);
+                        String timeStr = formatTime(time * 1000);//String.format("%d:%d:%d", hh, mm, ss);
+                        durationTextView.setText(String.format(getString(R.string.duration_format_str), timeStr));
+                    }
+                });
+            }
+        };
+    }
+
+    public static final String formatTime(long millis) {
+        long secs = millis / 1000;
+        return String.format("%02d:%02d:%02d", secs / 3600, (secs % 3600) / 60, secs % 60);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -183,12 +251,18 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         enterButton = view.findViewById(R.id.enterButton);
         exitButton = view.findViewById(R.id.exitButton);
         balanceTextView = view.findViewById(R.id.balance);
+        durationTextView = view.findViewById(R.id.duration);
         toolbar.setTitle("");
 
         enterButton.setOnClickListener(v -> {
             //startBarcodeScanning();
             onCodeChecked(20);
+            startTimer();
 
+        });
+
+        exitButton.setOnClickListener(v -> {
+            stoptimertask(getView());
         });
         toolbar.setNavigationOnClickListener(v -> {
             globalMenuController.open();

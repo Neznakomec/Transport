@@ -28,25 +28,11 @@ public class ApiUtils {
 	}
 
 	public static void test(ScanInfo info) throws IOException {
-		/*HttpURLConnection client = new HttpURLConnection(Uri.parse("http://10.70.8.249:8889/mobiletrack"));
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost("http://www.example.com");
-
-		String json = "{"id":1,"name":"John"}";
-		StringEntity entity = new StringEntity(json);
-		httpPost.setEntity(entity);
-		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-type", "application/json");
-
-		CloseableHttpResponse response = client.execute(httpPost);
-		assertThat(response.getStatusLine().getStatusCode(), equalTo(200));
-		client.close();*/
-
 		StringBuilder sb = new StringBuilder();
 
 		HttpURLConnection urlConnection=null;
 		try {
-			URL url = new URL("http://10.70.8.249:8889/mobiletrack");
+			URL url = new URL("http://172.20.10.9:8889/mobiletrack");
 			urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
