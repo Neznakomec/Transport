@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "RawData")
 class RawDataRecord(
+        @PrimaryKey
         @ColumnInfo(name = "Id")
         var id: Long = 0,
         @ColumnInfo(name = "RawJson")

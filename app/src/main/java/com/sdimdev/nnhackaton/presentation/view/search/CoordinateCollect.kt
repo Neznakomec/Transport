@@ -1,24 +1,39 @@
 package com.sdimdev.nnhackaton.presentation.view.search
 
 import android.content.Context
-import android.telephony.*
+import android.telephony.CellInfoGsm
+import android.telephony.CellInfoLte
+import android.telephony.CellInfoWcdma
+import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.JsonObject
+import com.sdimdev.nnhackaton.HackatonApplication
 import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider
-import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
 import com.sdimdev.nnhackaton.data.persistence.entity.mobile.ScanInfo
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import java.util.*
+import android.telephony.SubscriptionInfo
+import android.R
+import android.location.Location
+import android.provider.Settings.Global.getString
+import android.telephony.SubscriptionManager
+import android.telephony.CellIdentityLte
+import android.telephony.CellIdentityWcdma
+import android.telephony.CellIdentityGsm
+import android.telephony.CellInfo
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.sdimdev.nnhackaton.data.persistence.entity.mobile.RawDataRecord
+import com.sdimdev.nnhackaton.data.retrofit.ApiUtils
+import com.sdimdev.nnhackaton.data.retrofit.NetworkService
 
 
-class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseProvider: DataBaseProvider) {
+class CoordinateCollect(private val context: Context, private val dataBaseProvider: DataBaseProvider) {
+    var location: Location? = null
     val TAG: String = "OPERATORS";
-    private val context: Context? = fragment.context;
 
     fun startScan() {
         val telephonyManager = context?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -56,7 +71,7 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     }
 
 
-                    val subscriptionManager = SubscriptionManager.from(fragment.getActivity())
+                    val subscriptionManager = SubscriptionManager.from(context)
                     val activeSubscriptionInfoList = subscriptionManager.activeSubscriptionInfoList
 
                     var subscriptionInfo: SubscriptionInfo? = null
@@ -72,11 +87,13 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     scanInfo = ScanInfo(Date().time,
                             name, strength, type, mobileId = telephonyManager.imei)
 
-                    scanInfo?.lat = Random().nextDouble() * 100.0;
-                    scanInfo?.lon = Random().nextDouble() * 100.0;
+
+                    scanInfo?.lat = location?.latitude ?: -1.0 //Random().nextDouble() * 100.0;
+                    scanInfo?.lon = location?.longitude ?: -1.0 //Random().nextDouble() * 100.0;
+
 
                     val gson = Gson()
-                    val json = gson.toJson(subscriptionInfo)
+                    val json  = gson.toJson(subscriptionInfo)
                     val json2 = gson.toJson(cellInfos[i])
 
                     val jo: JsonObject = JsonObject()
@@ -94,8 +111,6 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
                     }
                 }
             }
-
-
         }
     }
 
@@ -116,19 +131,16 @@ class CoinsFragmentKt(private val fragment: CoinsFragment, private val dataBaseP
         val scanInfoDao = db.scanInfoDao
         val disposable = Completable.fromAction({
             scanInfoDao.insert(scanInfo, raw)
+
+            // retrofit
+            ApiUtils.test(scanInfo)
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .andThen({
-                    fragment.onCodeChecked(1)
-                })
                 .subscribe({
                     Log.d(TAG, "fine")
                 }, {
                     Log.e(TAG, "error", it)
                 });
-
-
     }
-
 }

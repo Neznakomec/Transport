@@ -109,6 +109,9 @@ dependencies {
 
     //multidex
     implementation 'com.android.support:multidex:1.0.3'
+
+    // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
 apply plugin: 'com.google.gms.google-services'

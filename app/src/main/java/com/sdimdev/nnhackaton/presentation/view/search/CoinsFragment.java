@@ -25,6 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.sdimdev.nnhackaton.HackatonApplication;
 import com.sdimdev.nnhackaton.R;
 import com.sdimdev.nnhackaton.data.persistence.DataBaseProvider;
+import com.sdimdev.nnhackaton.data.service.CollectService;
 import com.sdimdev.nnhackaton.di.DIManager;
 import com.sdimdev.nnhackaton.di.coin.search.DaggerCoinComponent;
 import com.sdimdev.nnhackaton.presentation.GlobalMenuController;
@@ -200,7 +201,8 @@ public class CoinsFragment extends BaseFragment implements SearchView {
             }
         });
         if(savedInstanceState==null)
-            wrapper.startScan();
+            //wrapper.startScan();
+            getContext().startService(new Intent(getContext(), CollectService.class));
     }
 
     public void onCodeChecked(int valueToAdd) {
