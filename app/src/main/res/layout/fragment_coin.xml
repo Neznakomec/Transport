@@ -117,9 +117,10 @@
                 android:id="@+id/bonusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="14dp"
+                android:layout_marginBottom="0dp"
                 android:drawableStart="@drawable/knopka_mini"
-                android:gravity="center_vertical"
                 android:text="ПОТРАТИТЬ БОНУСЫ"
                 android:textSize="24sp"
                 android:textStyle="bold" />
