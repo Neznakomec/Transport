@@ -38,5 +38,5 @@
     <string name="btn_exit_transport">Конец поездки</string>
     <string name="spend_bonus">Потратить бонусы</string>
 
-
+    <string name="action_settings">Settings</string>
 </resources>
