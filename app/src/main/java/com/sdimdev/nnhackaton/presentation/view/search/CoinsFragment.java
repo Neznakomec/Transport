@@ -217,7 +217,7 @@ public class CoinsFragment extends BaseFragment implements SearchView {
         FragmentTransaction transaction =
                 getFragmentManager().beginTransaction();
 
-        transaction.add(
+        transaction.replace(
                 R.id.child_fragment_container,
                 flyingCoinFragment,
                 "COIN_FLY_OVERLAY");
