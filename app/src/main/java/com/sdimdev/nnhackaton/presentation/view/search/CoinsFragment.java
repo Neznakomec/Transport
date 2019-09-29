@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.bonus.BonusActivity;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -195,14 +196,16 @@ public class CoinsFragment extends BaseFragment implements SearchView {
 
         TextView bonusText = view.findViewById(R.id.bonusText);
         bonusText.setOnClickListener(v -> {
-            Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
-            if (launchIntent != null) {
-                startActivity(launchIntent);//null pointer check in case package name was not found
+            //Intent launchIntent = HackatonApplication.app.getPackageManager().getLaunchIntentForPackage("example.com.myapplication");
+            Intent bonusActivity = new Intent(getContext(), BonusActivity.class);
+            if (bonusActivity != null) {
+                startActivity(bonusActivity);//null pointer check in case package name was not found
             }
         });
-        if(savedInstanceState==null)
+        if(savedInstanceState==null) {
             //wrapper.startScan();
             getContext().startService(new Intent(getContext(), CollectService.class));
+        }
     }
 
     public void onCodeChecked(int valueToAdd) {

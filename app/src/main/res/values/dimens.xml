@@ -12,4 +12,5 @@
     <dimen name="button_small_min_height">36dp</dimen>
     <dimen name="menu_item_padding">12dp</dimen>
     <dimen name="button_corner">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
